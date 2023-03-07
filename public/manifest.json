@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Gitlab Helper",
-  "description": "Helper you to better track your Gitlab merges requests",
+  "name": "Gitlab Sentinel",
+  "description": "Help you to better track your Gitlab merges requests",
   "version": "1.0",
   "background": { "service_worker": "src/pages/background/index.js" },
   "action": {

@@ -1,1 +1,1 @@
-# gitlab-helper
+# gitlab-sentinel
