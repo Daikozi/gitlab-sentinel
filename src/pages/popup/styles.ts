@@ -6,7 +6,6 @@ export const popupContainer = css({
   alignItems: "center",
   width: "300px",
   overflow: "hidden",
-  backgroundColor: "#eee",
   height: "100%",
   padding: "16px",
 });
@@ -16,12 +15,18 @@ export const logo = (isConnected = false): SerializedStyles =>
     "&:hover": {
       filter: "drop-shadow(0 0 2em #f6ae2d)",
     },
-    height: isConnected ? "6em" : "16em",
+    height: isConnected ? "4em" : "12em",
     transition: "all 0.5s ease-in-out",
   });
 
-export const title = (isConnected = false): SerializedStyles =>
-  css({
-    fontSize: isConnected ? "2em" : "4em",
-    transition: "all 0.5s ease-in-out",
-  });
+export const title = css({
+  fontSize: "2em",
+  marginBottom: "40px",
+});
+
+export const circularProgressContainer = css({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "288px",
+});

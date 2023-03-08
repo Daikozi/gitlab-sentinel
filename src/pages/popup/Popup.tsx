@@ -1,12 +1,23 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import gitlabLogo from "../../assets/gitlab.png";
 
 import * as styles from "./styles";
-import { Typography } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 import Login from "../../composants/login/Login";
+import { useMergeRequests } from "../../hooks/useMergeRequests";
+import { useIdentification } from "../../hooks/useIdentification";
+import MergeRequests from "../../composants/mergeRequests/MergeRequests";
 
 const Popup: FC = () => {
-  const isIdentified = false;
+  const { isIdentified, setIsIdentified } = useIdentification();
+
+  const { isLoading, isSuccess } = useMergeRequests();
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsIdentified(true);
+    }
+  }, [isSuccess]);
 
   return (
     <div css={styles.popupContainer}>
@@ -15,13 +26,18 @@ const Popup: FC = () => {
           <img src={gitlabLogo} css={styles.logo(isIdentified)} alt="logo" />
         </a>
       </div>
-      <Typography
-        component="h1"
-        css={styles.title(isIdentified)}
-        textAlign="center">
+      <Typography component="h1" css={styles.title} textAlign="center">
         Gitlab Sentinel
       </Typography>
-      <Login />
+      {isLoading ? (
+        <div css={styles.circularProgressContainer}>
+          <CircularProgress />
+        </div>
+      ) : isIdentified ? (
+        <MergeRequests />
+      ) : (
+        <Login />
+      )}
     </div>
   );
 };
