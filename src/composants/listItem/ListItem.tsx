@@ -1,7 +1,8 @@
 import { Divider, ListItemButton, Typography } from "@mui/material";
-import { FC, Fragment, HTMLAttributes } from "react";
+import { FC, Fragment, HTMLAttributes, useEffect } from "react";
 
 import * as styles from "./styles";
+import { useLastUpdates } from "../../hooks/useLastUpdates";
 
 type ListItemProps = {
   mrDd: number;
@@ -21,9 +22,38 @@ const ListItem: FC<ListItemProps> = ({
   web_url,
   ...rest
 }) => {
-  const isRead = false;
+  const { lastUpdates, setLastUpdates } = useLastUpdates();
 
+  const itemLastUpdate = lastUpdates.find(({ id }) => id === mrDd);
+  const isRead = itemLastUpdate?.isRead ?? false;
   const isReviewed = labels.includes("Reviewed Web");
+
+  const handleListItemClick = () => {
+    setLastUpdates({
+      id: mrDd,
+      lastUpdate: new Date(updatedAt),
+      lastView: new Date(),
+      isRead: true,
+    });
+  };
+
+  if (mrDd === 258229) {
+    console.log("itemLastUpdate", itemLastUpdate);
+    console.log("updatedAt", updatedAt);
+  }
+
+  useEffect(() => {
+    if (
+      itemLastUpdate &&
+      new Date(updatedAt) > new Date(itemLastUpdate?.lastUpdate)
+    ) {
+      setLastUpdates({
+        ...itemLastUpdate,
+        lastUpdate: new Date(updatedAt),
+        isRead: false,
+      });
+    }
+  }, [updatedAt, itemLastUpdate, mrDd, setLastUpdates]);
 
   return (
     <Fragment {...rest}>
@@ -34,7 +64,7 @@ const ListItem: FC<ListItemProps> = ({
         href={web_url}
         target="_blank"
         rel="noreferrer"
-        onClick={() => {}}>
+        onClick={handleListItemClick}>
         <Typography>{isRead ? "🟢" : "🔴"}</Typography>
         <Typography
           noWrap

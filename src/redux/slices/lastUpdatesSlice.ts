@@ -16,16 +16,21 @@ export const lastUpdatesSlice = createSlice({
   initialState,
   reducers: {
     setLastUpdates: (state, action) => {
-      const { id, lastUpdate, lastView, isRead } = action.payload;
+      const { id, lastUpdate, lastView } = action.payload;
 
       const index = state.findIndex((item) => item.id === id);
 
       if (index === -1) {
-        state.push({ id, lastUpdate, lastView, isRead });
+        state.push({
+          id,
+          lastUpdate,
+          lastView,
+          isRead: lastUpdate <= lastView,
+        });
       } else {
         state[index].lastUpdate = lastUpdate;
         state[index].lastView = lastView;
-        state[index].isRead = isRead;
+        state[index].isRead = lastUpdate <= lastView;
       }
 
       localStorage.setItem("lastUpdates", JSON.stringify(state));
