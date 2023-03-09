@@ -1,5 +1,3 @@
-// import { LoginInfosState } from "../../redux/slices/loginInfosSlice";
-
 import { MergeRequest } from "../../types";
 
 type LoginInfosState = {
@@ -70,6 +68,19 @@ const fetchMergeRequests = async () => {
     });
 };
 
+async function createOffscreen() {
+  if (await chrome.offscreen.hasDocument?.()) return;
+  await chrome.offscreen.createDocument({
+    url: "offscreen.html",
+    reasons: [],
+    justification: "keep service worker running",
+  });
+}
+
+chrome.runtime.onStartup.addListener(() => {
+  createOffscreen();
+});
+
 chrome.storage.local.get(["loginInfos"], (result) => {
   loginInfos = result.loginInfos;
 });
@@ -94,6 +105,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log("new badge update", badgeUpdate);
     chrome.storage.local.set({ badgeUpdate });
   }
+  if (message.keepAlive) console.log("keepAlive");
+
   chrome.action.setBadgeText({ text: "" });
 });
 
