@@ -6,13 +6,13 @@ Gitlab Sentinel is a Chrome extension that helps you keep track of merge request
 
 To install Gitlab Sentinel, follow these steps:
 
-1.Clone the repository or download the ZIP file and extract it.
-2.Open a terminal window and navigate to the root folder of the project.
-3.Run npm install to install the dependencies.
-4.Run npm run build to build the extension.
-5.Open Google Chrome and go to chrome://extensions.
-6.Turn on "Developer mode" in the top right corner of the page.
-7.Click on "Load unpacked" and select the dist folder in the project folder.
+1.  Clone the repository or download the ZIP file and extract it
+2.  Open a terminal window and navigate to the root folder of the project.
+    3.Run npm install to install the dependencies.
+    4.Run npm run build to build the extension.
+    5.Open Google Chrome and go to chrome://extensions.
+    6.Turn on "Developer mode" in the top right corner of the page.
+    7.Click on "Load unpacked" and select the dist folder in the project folder.
 
 The extension should now be installed and ready to use.
 
