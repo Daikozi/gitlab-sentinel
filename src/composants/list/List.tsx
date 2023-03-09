@@ -41,7 +41,7 @@ const List: FC<ListProps> = ({ icon, label, mergeRequestsList }) => {
                 labels={labels}
                 isDraft={draft}
                 updatedAt={updated_at}
-                mrDd={id}
+                mrId={id}
               />
             )
           )}

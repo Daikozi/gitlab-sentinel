@@ -5,7 +5,7 @@ import * as styles from "./styles";
 import { useLastUpdates } from "../../hooks/useLastUpdates";
 
 type ListItemProps = {
-  mrDd: number;
+  mrId: number;
   isDraft?: boolean;
   labels: string[];
   title: string;
@@ -14,7 +14,7 @@ type ListItemProps = {
 } & HTMLAttributes<HTMLDivElement>;
 
 const ListItem: FC<ListItemProps> = ({
-  mrDd,
+  mrId,
   isDraft = false,
   updatedAt,
   labels,
@@ -24,23 +24,18 @@ const ListItem: FC<ListItemProps> = ({
 }) => {
   const { lastUpdates, setLastUpdates } = useLastUpdates();
 
-  const itemLastUpdate = lastUpdates.find(({ id }) => id === mrDd);
+  const itemLastUpdate = lastUpdates.find(({ id }) => id === mrId);
   const isRead = itemLastUpdate?.isRead ?? false;
   const isReviewed = labels.includes("Reviewed Web");
 
   const handleListItemClick = () => {
     setLastUpdates({
-      id: mrDd,
+      id: mrId,
       lastUpdate: new Date(updatedAt),
       lastView: new Date(),
       isRead: true,
     });
   };
-
-  if (mrDd === 258229) {
-    console.log("itemLastUpdate", itemLastUpdate);
-    console.log("updatedAt", updatedAt);
-  }
 
   useEffect(() => {
     if (
@@ -53,7 +48,7 @@ const ListItem: FC<ListItemProps> = ({
         isRead: false,
       });
     }
-  }, [updatedAt, itemLastUpdate, mrDd, setLastUpdates]);
+  }, [updatedAt, itemLastUpdate, mrId, setLastUpdates]);
 
   return (
     <Fragment {...rest}>
