@@ -8,11 +8,11 @@ To install Gitlab Sentinel, follow these steps:
 
 1.  Clone the repository or download the ZIP file and extract it
 2.  Open a terminal window and navigate to the root folder of the project.
-    3.Run npm install to install the dependencies.
-    4.Run npm run build to build the extension.
-    5.Open Google Chrome and go to chrome://extensions.
-    6.Turn on "Developer mode" in the top right corner of the page.
-    7.Click on "Load unpacked" and select the dist folder in the project folder.
+3.  Run npm install to install the dependencies.
+4.  Run npm run build to build the extension.
+5.  Open Google Chrome and go to chrome://extensions.
+6.  Turn on "Developer mode" in the top right corner of the page.
+7.  Click on "Load unpacked" and select the dist folder in the project folder.
 
 The extension should now be installed and ready to use.
 
@@ -28,12 +28,12 @@ You can also search for a specific merge request by typing its title or ID in th
 
 Gitlab Sentinel requires you to provide the URL of your Gitlab instance and an access token with the api scope. To configure the extension, follow these steps:
 
-1.Go to your Gitlab profile settings and generate a new personal access token with the api scope.
-2.Copy the access token to your clipboard.
-3.Click on the extension icon in your browser's toolbar and select "Options".
-4.Paste the access token into the "Access Token" field.
-5.Enter the URL of your Gitlab instance in the "Gitlab URL" field.
-6.Click "Save".
+1.  Go to your Gitlab profile settings and generate a new personal access token with the api scope.
+2.  Copy the access token to your clipboard.
+3.  Click on the extension icon in your browser's toolbar and select "Options".
+4.  Paste the access token into the "Access Token" field.
+5.  Enter the URL of your Gitlab instance in the "Gitlab URL" field.
+6.  Click "Save".
 
 The extension will now use your Gitlab access token to retrieve merge requests from your Gitlab projects.
 
